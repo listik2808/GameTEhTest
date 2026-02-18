@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,14 +48,14 @@ public class PuzzleHandler : MonoBehaviour
     public float ShakeTime { get => shakeTime; }
     public float ShakeMultiplier { get => shakeMultiplier; }
 
-    
+
     public GameObject realAnimal;
     private void Start()
     {
         realAnimal = transform.GetChild(0).gameObject;
         realAnimal.SetActive(false);
-        
-        
+
+
         completePuzzle.SetActive(false);
     }
 
@@ -70,7 +69,7 @@ public class PuzzleHandler : MonoBehaviour
     {
         piecesCount--;
 
-        if(piecesCount == 0)
+        if (piecesCount == 0)
         {
             completePuzzle.SetActive(true);
             puzzleBackground.SetActive(false);

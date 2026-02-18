@@ -50,21 +50,21 @@ public class PuzzlePiece : MonoBehaviour
         _soundHandler = FindObjectOfType<SoundHandler>();
 
         _animationHandler = GetComponent<ShadowAnimationHandler>();
-        
+
         _collider2D = GetComponent<Collider2D>();
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _shadowSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
 
         Initialize();
-        
+
         initialPosition = _puzzleHandler.GenerateInitialPosition();
         StartCoroutine(VisitStartPosition(_rightPlaceTransform.position, false));
     }
 
     private void Update()
     {
-        if(inInitialPlace)
+        if (inInitialPlace)
         {
             if (!_puzzleHandler.UseMouse)
             {
@@ -108,16 +108,16 @@ public class PuzzlePiece : MonoBehaviour
     {
         Touch touch = Input.GetTouch(0);
         Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-        
-        
+
+
         Vector2 distance_to_screen = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 pos_move = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        Vector2 pos = new Vector3( pos_move.x - distance.x , pos_move.y - distance.y);
+        Vector2 pos = new Vector3(pos_move.x - distance.x, pos_move.y - distance.y);
 
         switch (touch.phase)
         {
             case TouchPhase.Began:
-                if(_collider2D == Physics2D.OverlapPoint(touchPosition))
+                if (_collider2D == Physics2D.OverlapPoint(touchPosition))
                 {
                     isTouched = true;
                     ChangeSortingOrder(2);
@@ -168,7 +168,7 @@ public class PuzzlePiece : MonoBehaviour
                     inInitialPlace = true;
                     break;
                 case PositionsTypes.Initial:
-                    
+
                     _animationHandler.outline.gameObject.SetActive(false);
 
                     ChangeSortingOrder(-2);
@@ -184,7 +184,7 @@ public class PuzzlePiece : MonoBehaviour
                     break;
                 default:
                     break;
-            }  
+            }
         }
     }
 
@@ -192,10 +192,10 @@ public class PuzzlePiece : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         TouchPhase touch = TouchPhase.Canceled;
-        
+
         Vector2 distance_to_screen = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 pos_move = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        Vector2 pos = new Vector3( pos_move.x - distance.x , pos_move.y - distance.y);
+        Vector2 pos = new Vector3(pos_move.x - distance.x, pos_move.y - distance.y);
 
 
         if (Input.touchCount == 0)
@@ -223,7 +223,7 @@ public class PuzzlePiece : MonoBehaviour
                     ChangeSortingOrder(2);
                     _animationHandler.StartAnimation(shadowAnimationDuration, 1, false, Vector2.zero);
 
-                    isTouched = true;                    
+                    isTouched = true;
                     firstPress = false;
                 }
                 break;
@@ -259,11 +259,11 @@ public class PuzzlePiece : MonoBehaviour
         {
             smooth = Random.Range(minSmoothAnimationMultiplier, maxSmoothAnimationMultiplier);
         }
-        
+
         _transform.position = targetPosition;
         yield return new WaitForSeconds(0.2f);
 
-        while(!inInitialPlace)
+        while (!inInitialPlace)
         {
             smooth += Time.deltaTime;
             MovePiece(initialPosition, smooth);
@@ -278,7 +278,7 @@ public class PuzzlePiece : MonoBehaviour
             StartCoroutine(ChangeShakeState());
             StartCoroutine(ShakeObject());
         }
-            
+
     }
 
     private void Disactivate() => gameObject.SetActive(false);
@@ -287,7 +287,7 @@ public class PuzzlePiece : MonoBehaviour
     {
         _spriteRenderer.sortingOrder += count;
         _shadowSpriteRenderer.sortingOrder += count;
-        
+
         _animationHandler.outline.GetComponent<SpriteRenderer>().sortingOrder += count;
     }
 

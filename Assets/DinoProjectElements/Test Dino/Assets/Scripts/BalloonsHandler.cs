@@ -23,7 +23,7 @@ public class BalloonsHandler : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 7;
     [SerializeField]
-	// Через сколько
+    // Через сколько
     private float timeBeforeSpawn = 4;
     private int countOnScene;
     private float edgeX,
@@ -41,7 +41,7 @@ public class BalloonsHandler : MonoBehaviour
 
     private void Awake()
     {
-        _puzzleHandler = FindObjectOfType<PuzzleHandler>();   
+        _puzzleHandler = FindObjectOfType<PuzzleHandler>();
     }
 
     private void OnEnable()
@@ -83,7 +83,7 @@ public class BalloonsHandler : MonoBehaviour
         if (countOnScene != 0)
         {
             countOnScene--;
-            if(_soundHandler != null)
+            if (_soundHandler != null)
             {
                 _soundHandler.PlayBalloonClip();
             }
@@ -92,7 +92,7 @@ public class BalloonsHandler : MonoBehaviour
 
     public void IncreaseBalloonsCount()
     {
-        if (!firstUse) 
+        if (!firstUse)
             countOnScene++;
     }
 
@@ -103,9 +103,9 @@ public class BalloonsHandler : MonoBehaviour
             _soundHandler.PlayClapsClip();
             isFirst = false;
         }
-            
+
         int count = 0;
-        while(count < spawnCount)
+        while (count < spawnCount)
         {
             SpawnBalloons(oneTimeSpawnCount);
             count += oneTimeSpawnCount;

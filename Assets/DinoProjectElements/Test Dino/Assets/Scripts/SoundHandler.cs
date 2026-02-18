@@ -26,55 +26,60 @@ public class SoundHandler : MonoBehaviour
 
     [SerializeField]
     private float startClipTime = 0.5f;
-	
- public AudioClip[] MusicList;
- public AudioSource music_src2;
- 
-  int RndMusic=0;
-  bool EndSound= false;
-      public void RandomMusic()
+
+    public AudioClip[] MusicList;
+    public AudioSource music_src2;
+
+    int RndMusic = 0;
+    bool EndSound = false;
+    public void RandomMusic()
     {
-    RndMusic++;
-	if (!EndSound) {
-            if (RndMusic == MusicList.Length) {
+        RndMusic++;
+        if (!EndSound)
+        {
+            if (RndMusic == MusicList.Length)
+            {
                 music_src2.Stop();
-             //   ButtonMusic.GetComponent<Animator>().enabled = false;
-              //  ButtonMusic.GetComponent<Image>().sprite = MusicSprite[0];
+                //   ButtonMusic.GetComponent<Animator>().enabled = false;
+                //  ButtonMusic.GetComponent<Image>().sprite = MusicSprite[0];
                 RndMusic = -1;
-            } else {
-             //   ButtonMusic.GetComponent<Image>().sprite = MusicSprite[RndMusic + 1];
-             //   ButtonMusic.GetComponent<Animator>().enabled = true;
+            }
+            else
+            {
+                //   ButtonMusic.GetComponent<Image>().sprite = MusicSprite[RndMusic + 1];
+                //   ButtonMusic.GetComponent<Animator>().enabled = true;
                 music_src2.clip = MusicList[RndMusic];
                 music_src2.Play();
 
 
-	}}
-	else
-	{
-		PlayCompleteClip();
-	}
-      
+            }
+        }
+        else
+        {
+            PlayCompleteClip();
+        }
+
     }
-	
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         StartCoroutine(StartClip());
-		
-		
-		    RndMusic = UnityEngine.Random.Range(0, MusicList.Length);
-        music_src2.clip = MusicList[RndMusic];
-        
-		// Если взрослый режим отключим музыку
-	        music_src2.Play();
-		
 
-	
-	
+
+        RndMusic = UnityEngine.Random.Range(0, MusicList.Length);
+        music_src2.clip = MusicList[RndMusic];
+
+        // Если взрослый режим отключим музыку
+        music_src2.Play();
+
+
+
+
     }
 
     public void PlayWinClip() => _audioSource.PlayOneShot(winClip);
-	
+
 
     public void PlayFailClip() => _audioSource.PlayOneShot(failClip);
 
@@ -86,43 +91,45 @@ public class SoundHandler : MonoBehaviour
 
     public void PlayNameClip()
     {
-		if (!EndSound) {
-        AudioClip nameClip = (LanguageHandler.language == LanguageType.English) ? EnglishNameClip : RussianNameClip;
-        _audioSource.PlayOneShot(nameClip);
-		}
-	EndSound=true;
+        if (!EndSound)
+        {
+            AudioClip nameClip = (LanguageHandler.language == LanguageType.English) ? EnglishNameClip : RussianNameClip;
+            _audioSource.PlayOneShot(nameClip);
+        }
+        EndSound = true;
     }
 
     public void PlayClapsClip()
     {
         _audioSource.PlayOneShot(clapsClip);
-	
+
     }
 
     public void WaitPlayNameClip()
     {
         StartCoroutine(StartNameClip());
-		
-	
+
+
     }
 
     private IEnumerator StartClip()
     {
         yield return new WaitForSeconds(startClipTime);
         PlayStartClip();
-	
+
     }
 
     private IEnumerator StartNameClip()
     {
-			if (!EndSound) {
-		          music_src2.Stop();
-        yield return new WaitForSeconds(0.5f);
+        if (!EndSound)
+        {
+            music_src2.Stop();
+            yield return new WaitForSeconds(0.5f);
 
-        PlayNameClip();
-		yield return new WaitForSeconds(1f);
-			PlayCompleteClip();
-			}
+            PlayNameClip();
+            yield return new WaitForSeconds(1f);
+            PlayCompleteClip();
+        }
     }
 
 }

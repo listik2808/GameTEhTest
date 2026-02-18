@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CompletePuzzleHandler : MonoBehaviour
@@ -41,8 +40,8 @@ public class CompletePuzzleHandler : MonoBehaviour
         startPosition = _transform.position;
         firstPlay = true;
         StartCoroutine(PlayAnimation());
-        
-        Invoke(nameof(ShowAnimal),10f);
+
+        Invoke(nameof(ShowAnimal), 10f);
 
     }
     private void ShowAnimal()
@@ -54,7 +53,7 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private void Update()
     {
-        if(!isPlaying)
+        if (!isPlaying)
         {
             if (useMouse)
                 MouseHandle();
@@ -88,7 +87,7 @@ public class CompletePuzzleHandler : MonoBehaviour
 
     private void MouseHandle()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -106,7 +105,7 @@ public class CompletePuzzleHandler : MonoBehaviour
         _animationHandler.StartAnimation(shadowAnimationDuration, 1, false, Vector2.zero);
 
         yield return new WaitForSeconds(animationDuration);
-        
+
         //_transform.position = startPosition + new Vector2(-0.1f, 0.1f);
         _animationHandler.StartAnimation(shadowAnimationDuration, -1, true, new Vector2(0.1f, -0.1f));
         isPlaying = false;

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ public class ParticleHandler : MonoBehaviour
 
     public void PlayParticle(Vector2 position)
     {
-        foreach(ParticleSystem paticle in particles)
+        foreach (ParticleSystem paticle in particles)
         {
             paticle.transform.position = position;
             paticle.Play();

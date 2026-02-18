@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Balloon : MonoBehaviour
@@ -30,7 +28,7 @@ public class Balloon : MonoBehaviour
     {
         MoveUp();
 
-        if(!_balloonsHandler.UseMouse)
+        if (!_balloonsHandler.UseMouse)
             TouchHandle();
         else
             MouseHandle();

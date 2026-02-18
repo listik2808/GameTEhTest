@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
     public void LoadLevelScene(int index)
     {
-        if (index >= 0 && index <= SceneManager.sceneCountInBuildSettings) 
+        if (index >= 0 && index <= SceneManager.sceneCountInBuildSettings)
             SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
