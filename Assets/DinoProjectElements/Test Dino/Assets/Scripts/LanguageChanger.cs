@@ -28,16 +28,13 @@ public class LanguageChanger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
-
             if (Pn_Exit.activeSelf == true)
             {
                 Pn_Exit.SetActive(false);
             }
             else { Pn_Exit.SetActive(true); }
         }
-
-
+        else{}
     }
 
 
@@ -45,7 +42,6 @@ public class LanguageChanger : MonoBehaviour
     {
         if (LanguageHandler.language == LanguageType.English) { GetComponent<Text>().text = "EN"; }
         else { GetComponent<Text>().text = "RU"; }
-
     }
 
     public void ChangeLanguage()
